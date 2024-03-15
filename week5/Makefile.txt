@@ -1,0 +1,42 @@
+DATA_FILES := datos.txt datos1.txt
+PLOT_FILES := plot.png plot1.png
+
+# Define los comandos para generar los datos y los gráficos
+GENERATE_DATA := python makedatos.py && python makedatos1.cpp
+GENERATE_PLOTS := python plotdatos.py && python plotdatos1.py
+
+# Define el comando para compilar el archivo LaTeX
+LATEX := pdflatex
+
+# Define el comando para limpiar los archivos generados
+CLEAN := rm -f $(DATA_FILES) $(PLOT_FILES) resultados.aux resultados.log resultados.pdf
+
+# Regla para generar los datos y los gráficos
+all: $(DATA_FILES) $(PLOT_FILES)
+
+$(DATA_FILES): $(GENERATE_DATA)
+
+$(PLOT_FILES): $(DATA_FILES) $(GENERATE_PLOTS)
+
+# Regla para generar el archivo LaTeX y el pdf final
+resultados.tex: $(PLOT_FILES)
+    echo "\documentclass{article}" > resultados.tex
+    echo "\usepackage{graphicx}" >> resultados.tex
+    echo "\begin{document}" >> resultados.tex
+    echo "\section*{Resultados}" >> resultados.tex
+    echo "Insertar gráficas aquí:" >> resultados.tex
+    echo "\begin{figure}[htbp]" >> resultados.tex
+    echo "\centering" >> resultados.tex
+    echo "\includegraphics[width=0.45\textwidth]{plot.png}" >> resultados.tex
+    echo "\includegraphics[width=0.45\textwidth]{plot1.png}" >> resultados.tex
+    echo "\caption{Gráficas}" >> resultados.tex
+    echo "\end{figure}" >> resultados.tex
+    echo "\end{document}" >> resultados.tex
+
+# Regla para compilar el archivo LaTeX
+pdf: resultados.tex
+    $(LATEX) resultados.tex
+
+# Regla para limpiar los archivos generados
+clean:
+    $(CLEAN)
