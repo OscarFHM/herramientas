@@ -1,0 +1,26 @@
+#include<iostream>
+#include<cstdlib>
+#include<fstream>
+#include<cmath>
+using std::cout;
+using std::endl;
+using std::ofstream;
+int main(){
+	float x[0]=0;
+	float y[0]=1;//
+	float t_fin=10;
+	float h=0.1;
+	int N=t_fin/h;
+	ofstream archivo("datos.dat");
+	for(int i=0;i<N;i++){
+		x[i+1]=x[i]+h;
+		y[i+1]=y[i]-h*exp(x[i]);
+		archivo << x[i+1] <<" "< <y[i+1] << endl;
+
+	}
+	archivo.close();
+
+
+
+return 0;
+}
