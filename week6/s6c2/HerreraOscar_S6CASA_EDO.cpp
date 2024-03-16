@@ -5,7 +5,7 @@
 #include<cmath>
 
 using namespace std;
-const int N=100000;
+const int N=10000;
 
 void RungeKutta (double h,std::array<double,N> x,std::array<double,N> y,std::string name);
 void Euler (double h,std::array<double,N> x,std::array<double,N> y,std::string name);
