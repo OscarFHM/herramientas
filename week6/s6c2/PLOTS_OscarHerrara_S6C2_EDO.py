@@ -1,10 +1,21 @@
 import numpy as np
 import matplotlib.pylab as plt
+ 
 
+datosE=np.genfromtxt("datosE.dat")
+datosRK=np.genfromtxt("datosRK.dat")
+ErrorE=np.genfromtxt("ErrorE.dat")
+ErrorRK=np.genfromtxt("ErrorRK.dat")
 
-datos=np.genfromtxt("datos.dat")
-
-plt.figure()
-plt.plot(datos[:,0],datos[:,1])
+plt.figure(1)
+plt.plot(datosE[:,0],datosE[:,1],'b',label='Metodo Euler')
+plt.plot(datosRK[:,0],datosRK[:,1],'--r',label='Metodo RungeKutta')
+plt.legend()
 plt.grid()
-plt.savefig("plot.pdf")
+plt.savefig("solucion.jpg")
+plt.figure(2)
+plt.plot(ErrorE[:,0],ErrorE[:,1],'b',label='Error Euler')
+plt.plot(ErrorRK[:,0],ErrorRK[:,1],'--r',label='Error RungeKutta')
+plt.legend()
+plt.grid()
+plt.savefig("Error.jpg")
