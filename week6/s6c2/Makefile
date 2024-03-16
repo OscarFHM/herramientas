@@ -23,4 +23,6 @@ EDO2.out: HerreraOscar_S6CASA_EDO2orden.cpp
 
 
 clean:	
-	rm -f  *.dat *.out
+	rm -f  *.dat *.out 
+clearall:
+	rm -f  *.dat *.out *.jpg *.pdf *.png
